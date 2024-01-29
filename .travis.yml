@@ -1,21 +1,14 @@
-language: go 
+language: go # or any other language
+
 env:
   global:
     - COSIGN_KEY="cosign.key"
+
 before_install:
-  - echo "$SSH_KEY_FOR_SIGNING" | base64 --decode > $COSIGN_KEY
+  - echo "$SSH_PRIVATE_KEY" | base64 --decode > $COSIGN_KEY
   - chmod 600 $COSIGN_KEY
-  - wget https://github.com/sigstore/cosign/releases/download/v1.0.0/cosign-linux-amd64
-  - sudo mv cosign-linux-amd64 /usr/local/bin/cosign
-  - sudo chmod +x /usr/local/bin/cosign
+
 script:
   - echo "Build and test commands would go here if there were any"
   - echo "Signing the dummy artifact"
   - cosign sign-blob --key $COSIGN_KEY artifact.txt
-echo '#!/usr/bin/expect -f' > script.exp
-echo 'spawn cosign sign-blob --key $env(COSIGN_KEY) artifact.txt' >> script.exp
-echo 'expect "Enter password for private key:"' >> script.exp
-echo 'send "test\n"' >> script.exp
-echo 'interact' >> script.exp
-chmod +x script.exp
-./script.exp
