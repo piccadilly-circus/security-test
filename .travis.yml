@@ -9,8 +9,8 @@ language: go # or any other language
 env:
   global:
     - COSIGN_KEY="cosign.key"
-
+    - COSIGN_PASSWORD="1111"
 script:
   - echo "Build and test commands would go here if there were any"
   - echo "Signing the dummy artifact"
-  - cosign sign-blob --key $COSIGN_KEY artifact.txt
+  - cosign sign-blob --key $COSIGN_KEY --password $COSIGN_PASSWORD artifact.txt
