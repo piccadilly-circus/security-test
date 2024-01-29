@@ -7,7 +7,7 @@ env:
 before_install:
   - echo "$SSH_PRIVATE_KEY" | base64 --decode > $COSIGN_KEY
   - chmod 600 $COSIGN_KEY
-
+cosign version
 script:
   - echo "Build and test commands would go here if there were any"
   - echo "Signing the dummy artifact"
