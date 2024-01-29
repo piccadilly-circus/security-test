@@ -5,7 +5,7 @@ env:
     - COSIGN_KEY="cosign.key"
 
 before_install:
-  - echo "$SSH_PRIVATE_KEY" | base64 --decode > $COSIGN_KEY
+  - echo "$SSH_KEY_FOR_SIGNING" | base64 --decode > $COSIGN_KEY
   - chmod 600 $COSIGN_KEY
 
 script:
