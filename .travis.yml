@@ -1,16 +1,13 @@
-before_install:
-  - wget https://github.com/sigstore/cosign/releases/download/v1.0.0/cosign-linux-amd64
-  - sudo mv cosign-linux-amd64 /usr/local/bin/cosign
-  - sudo chmod +x /usr/local/bin/cosign
-language: go # or any other language
-
+language: go 
 env:
   global:
     - COSIGN_KEY="cosign.key"
-
 before_install:
   - echo "$SSH_KEY_FOR_SIGNING" | base64 --decode > $COSIGN_KEY
   - chmod 600 $COSIGN_KEY
+  - wget https://github.com/sigstore/cosign/releases/download/v1.0.0/cosign-linux-amd64
+  - sudo mv cosign-linux-amd64 /usr/local/bin/cosign
+  - sudo chmod +x /usr/local/bin/cosign
 
 script:
   - echo "Build and test commands would go here if there were any"
