@@ -13,4 +13,4 @@ before_install:
 
 script:
   - echo "Build and test commands would go here if there were any"
-  - cosign sign-blob --key $COSIGN_KEY artifact.txt
+- yes | cosign sign-blob --key $COSIGN_KEY artifact.txt
