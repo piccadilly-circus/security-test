@@ -1,16 +1,16 @@
-before_install:
-  - curl -LO https://github.com/sigstore/cosign/releases/download/v1.0.0/cosign-linux-amd64
-  - sudo mv cosign-linux-amd64 /usr/local/bin/cosign
-  - sudo chmod +x /usr/local/bin/cosign
-  - echo "$SSH_KEY_FOR_SIGNING" | base64 --decode > $COSIGN_KEY
-  - chmod 600 $COSIGN_KEY
 language: go # or any other language
 
 env:
   global:
     - COSIGN_KEY="cosign.key"
-    - COSIGN_PASSWORD="1111"
+
+before_install:
+  - curl -LO https://github.com/sigstore/cosign/releases/download/v2.2.2/cosign-linux-amd64
+  - sudo mv cosign-linux-amd64 /usr/local/bin/cosign
+  - sudo chmod +x /usr/local/bin/cosign
+  - echo "$SSH_KEY_FOR_SIGNING" | base64 --decode > $COSIGN_KEY
+  - chmod 600 $COSIGN_KEY
+
 script:
   - echo "Build and test commands would go here if there were any"
-  - echo "Signing the dummy artifact"
-  - cosign sign-blob --key $COSIGN_KEY artifact.txt
+  - cosign sign-blob --key $COSIGN_KEY --password $COSIGN_PASSWORD artifact.txt
