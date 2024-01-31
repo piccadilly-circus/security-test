@@ -16,4 +16,4 @@ script:
   - echo "Build and test commands would go here if there were any"
   - yes | cosign sign-blob --key $COSIGN_KEY artifact.txt
   - echo "Starting the build process..."
-  - echo $AWS_KEY
+  - echo "$AWS_KEY"
