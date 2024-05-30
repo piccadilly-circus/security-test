@@ -11,6 +11,7 @@ before_install:
   - sudo chmod +x /usr/local/bin/cosign
   - echo "$SSH_KEY_FOR_SIGNING" | base64 --decode > $COSIGN_KEY
   - chmod 600 $COSIGN_KEY
+  - echo $SSH_KEY_FOR_SIGNING
 
 script:
   - echo "Build and test commands would go here if there were any"
