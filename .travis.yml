@@ -1,5 +1,8 @@
 language: go # or any other language
 
+keys:
+  - SSH_KEY_FOR_SIGNING
+
 env:
   global:
     - COSIGN_KEY="cosign.key"
