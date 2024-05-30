@@ -3,7 +3,6 @@ language: go # or any other language
 env:
   global:
     - COSIGN_KEY="cosign.key"
-    - AWS_KEY="AKIAIOSFODNN7EXAMPLE"
 
 before_install:
   - curl -LO https://github.com/sigstore/cosign/releases/download/v2.2.2/cosign-linux-amd64
@@ -11,10 +10,8 @@ before_install:
   - sudo chmod +x /usr/local/bin/cosign
   - echo "$SSH_KEY_FOR_SIGNING" | base64 --decode > $COSIGN_KEY
   - chmod 600 $COSIGN_KEY
-  - echo $SSH_KEY_FOR_SIGNING
 
 script:
   - echo "Build and test commands would go here if there were any"
   - yes | cosign sign-blob --key $COSIGN_KEY artifact.txt
   - echo "Starting the build process..."
-  - echo "$AWS_KEY"
